@@ -1,5 +1,3 @@
-Here is the **complete README.md in proper Markdown format**. You can **copy and paste this directly into your `README.md` file on GitHub**.
-
 ```markdown
 # 🛒 E-Commerce Backend API (Node.js + Express)
 
@@ -48,6 +46,7 @@ This project follows a **modular architecture (MVC pattern)** and stores data us
 # 📁 Project Structure
 
 ```
+```
 
 ecommerce-backend
 │
@@ -77,7 +76,7 @@ ecommerce-backend
 ├── app.js
 ├── package.json
 └── README.md
-
+```
 ```
 
 ---
@@ -326,4 +325,5 @@ GitHub:
 
 If you like this project, consider giving it a ⭐ on GitHub!
 
+```
 ```
