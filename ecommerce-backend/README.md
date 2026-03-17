@@ -1,4 +1,3 @@
-```markdown
 # 🛒 E-Commerce Backend API (Node.js + Express)
 
 A **RESTful backend API** for a simple e-commerce application built using **Node.js and Express.js**.  
