@@ -1,0 +1,12 @@
+[
+ {
+  "id": 1,
+  "name": "John Doe",
+  "branch": "Computer Science"
+ },
+ {
+  "id": 2,
+  "name": "Jane Smith",
+  "branch": "Electronics"
+ }
+]

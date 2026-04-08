@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^5.2.1",
+    "prompt-sync": "^4.2.0"
+  },
+  "name": "internship---geekwick",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000G\u0000e\u0000e\u0000k\u0000W\u0000i\u0000c\u0000k\u0000-\u0000-\u0000-\u0000I\u0000n\u0000t\u0000e\u0000r\u0000n\u0000s\u0000h\u0000i\u0000p\u0000\r\u0000 \u0000",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deekshithshaiva05/GeekWick---Internship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Deekshithshaiva05/GeekWick---Internship/issues"
+  },
+  "homepage": "https://github.com/Deekshithshaiva05/GeekWick---Internship#readme"
+}
