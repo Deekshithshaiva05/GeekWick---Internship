@@ -1,0 +1,246 @@
+Basic Tasks
+1. Insert one student with name, age, course.
+
+> db.students.insertOne({name:"Deekshith", age:23, course:"AI/Ml"})
+
+
+2. Insert one employee with name, department, salary.
+
+> db.employee.insertOne({name: "Karthik", department: "CSE", salary: 30000})
+
+
+3. Insert one book with title, author, price.
+
+> db.createCollection("books")
+
+> db.book.insertOne({title: "Ego", author: "Sanjay", price: 200})
+
+
+4. Insert one movie with name, rating, genre.
+
+> db.createCollection("movies")
+
+> db.movie.insertOne({name: "Inception", rating: 9, genre: "Sci-Fi"})
+
+
+5. Insert one department with name and location.
+
+> db.department.insertOne({name: "IT", location: "Bangalore"})
+
+
+
+
+Intermediate Tasks
+1. Insert 5 students at once using insertMany().
+
+db.students.insertMany([
+  { name: "Deekshith", age: 21, course: "AI/ML" },
+  { name: "Rahul", age: 22, course: "CSE" },
+  { name: "Sneha", age: 20, course: "ECE" },
+  { name: "Amit", age: 23, course: "IT" },
+  { name: "Priya", age: 21, course: "Data Science" }
+])
+
+
+2. Insert 5 employees with different salaries and departments.
+
+db.employee.insertMany([
+  { name: "Karthik", department: "CSE", salary: 30000 },
+  { name: "Anil", department: "HR", salary: 25000 },
+  { name: "Meena", department: "Finance", salary: 40000 },
+  { name: "Ravi", department: "IT", salary: 35000 },
+  { name: "Pooja", department: "Marketing", salary: 28000 }
+])
+
+
+3. Insert 5 products with category and stock.
+
+db.products.insertMany([
+  { name: "Laptop", category: "Electronics", stock: 10 },
+  { name: "Phone", category: "Electronics", stock: 25 },
+  { name: "Table", category: "Furniture", stock: 15 },
+  { name: "Chair", category: "Furniture", stock: 30 },
+  { name: "Headphones", category: "Accessories", stock: 50 }
+])
+
+
+4. Insert 5 tasks with title, priority, status.
+
+> db.createCollection("tasks")
+
+db.tasks.insertMany([
+  { title: "Complete MongoDB task", priority: "High", status: "Pending" },
+  { title: "Submit assignment", priority: "Medium", status: "Completed" },
+  { title: "Attend meeting", priority: "High", status: "Pending" },
+  { title: "Practice coding", priority: "Low", status: "In Progress" },
+  { title: "Update resume", priority: "Medium", status: "Pending" }
+])
+
+
+5. Insert 5 interns with fields: name, age, department, isActive.
+
+db.interns.insertMany([
+  { name: "Arjun", age: 21, department: "AI", isActive: true },
+  { name: "Divya", age: 22, department: "Web", isActive: true },
+  { name: "Kiran", age: 23, department: "Data Science", isActive: false },
+  { name: "Neha", age: 20, department: "ML", isActive: true },
+  { name: "Rohit", age: 22, department: "Cybersecurity", isActive: false }
+])
+
+
+
+Advanced Tasks
+1. Insert 10 documents into orders where each document contains:
+       ( customerName, items, totalAmount, status )
+
+> db.createCollection("orders")
+
+db.orders.insertMany([
+  {
+    customerName: "Deekshith",
+    items: ["Laptop", "Mouse"],
+    totalAmount: 65000,
+    status: "Delivered"
+  },
+  {
+    customerName: "Rahul",
+    items: ["Phone"],
+    totalAmount: 30000,
+    status: "Pending"
+  },
+  {
+    customerName: "Sneha",
+    items: ["Tablet", "Cover"],
+    totalAmount: 20000,
+    status: "Shipped"
+  },
+  {
+    customerName: "Amit",
+    items: ["Headphones"],
+    totalAmount: 2000,
+    status: "Delivered"
+  },
+  {
+    customerName: "Priya",
+    items: ["Chair", "Table"],
+    totalAmount: 5000,
+    status: "Pending"
+  },
+  {
+    customerName: "Kiran",
+    items: ["Monitor"],
+    totalAmount: 15000,
+    status: "Delivered"
+  },
+  {
+    customerName: "Neha",
+    items: ["Keyboard", "Mouse"],
+    totalAmount: 3000,
+    status: "Shipped"
+  },
+  {
+    customerName: "Rohit",
+    items: ["Laptop"],
+    totalAmount: 70000,
+    status: "Pending"
+  },
+  {
+    customerName: "Anil",
+    items: ["Speaker"],
+    totalAmount: 4000,
+    status: "Delivered"
+  },
+  {
+    customerName: "Divya",
+    items: ["Smartwatch"],
+    totalAmount: 10000,
+    status: "Shipped"
+  }
+])
+
+
+2. Insert documents with nested fields like:
+       ( address.city, address.pincode )
+
+db.customers.insertMany([
+  {
+    name: "Deekshith",
+    address: {
+      city: "Mysuru",
+      pincode: 570001
+    }
+  },
+  {
+    name: "Rahul",
+    address: {
+      city: "Bangalore",
+      pincode: 560001
+    }
+  }
+])
+
+
+3. Insert documents with arrays like:
+        (skills, hobbies)
+
+> db.createCollection("profiles")
+
+db.profiles.insertMany([
+  {
+    name: "Amit",
+    skills: ["Python", "ML"],
+    hobbies: ["Cricket", "Gaming"]
+  },
+  {
+    name: "Sneha",
+    skills: ["Java", "Spring"],
+    hobbies: ["Reading", "Music"]
+  }
+])
+
+
+
+4. Insert documents with boolean and date-like values.
+
+> db.createCollection("events")
+
+db.events.insertMany([
+  {
+    title: "Hackathon",
+    isActive: true,
+    date: new Date("2026-04-10")
+  },
+  {
+    title: "Workshop",
+    isActive: false,
+    date: new Date("2026-05-01")
+  }
+])
+
+
+5. Insert a mixed dataset into users where some users have skills, some have address, some have both.
+
+db.users.insertMany([
+  {
+    name: "Deekshith",
+    skills: ["AI", "ML"]
+  },
+  {
+    name: "Rahul",
+    address: {
+      city: "Delhi",
+      pincode: 110001
+    }
+  },
+  {
+    name: "Sneha",
+    skills: ["Data Science"],
+    address: {
+      city: "Mumbai",
+      pincode: 400001
+    }
+  },
+  {
+    name: "Amit"
+  }
+])
