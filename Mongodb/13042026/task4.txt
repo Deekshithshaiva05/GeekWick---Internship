@@ -1,0 +1,437 @@
+internDB> db.employees.createIndex({ joinedDate: 1 })
+joinedDate_1
+internDB> const hr = ObjectId()
+
+internDB> const eng = ObjectId()
+
+internDB> const mkt = ObjectId()
+
+internDB> db.departments.insertMany([
+|   { _id: hr, name: "HR" },
+|   { _id: eng, name: "Engineering" },
+|   { _id: mkt, name: "Marketing" }
+| ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69dcdf3f200d1811893682e3'),
+    '1': ObjectId('69dcdf46200d1811893682e4'),
+    '2': ObjectId('69dcdf4b200d1811893682e5')
+  }
+}
+internDB> db.interns.insertMany([
+|   { name: "Amit", departmentId: eng },
+|   { name: "Neha", departmentId: hr },
+|   { name: "Priya", departmentId: mkt }
+| ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69dcdf69200d1811893682e6'),
+    '1': ObjectId('69dcdf69200d1811893682e7'),
+    '2': ObjectId('69dcdf69200d1811893682e8')
+  }
+}
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "department"
+|     }
+|   }
+| ])
+|
+[
+  {
+    _id: ObjectId('69dcd853200d1811893682d1'),
+    name: 'Amit',
+    age: 22,
+    department: [],
+    isActive: true
+  },
+  {
+    _id: ObjectId('69dcd853200d1811893682d2'),
+    name: 'Neha',
+    age: 23,
+    department: [],
+    isActive: true
+  },
+  {
+    _id: ObjectId('69dcd853200d1811893682d3'),
+    name: 'Rahul',
+    age: 21,
+    department: [],
+    isActive: false
+  },
+  {
+    _id: ObjectId('69dcd853200d1811893682d4'),
+    name: 'Priya',
+    age: 24,
+    department: [],
+    isActive: true
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e6'),
+    name: 'Amit',
+    departmentId: ObjectId('69dcdf46200d1811893682e4'),
+    department: [ { _id: ObjectId('69dcdf46200d1811893682e4'), name: 'Engineering' } ]
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e7'),
+    name: 'Neha',
+    departmentId: ObjectId('69dcdf3f200d1811893682e3'),
+    department: [ { _id: ObjectId('69dcdf3f200d1811893682e3'), name: 'HR' } ]
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e8'),
+    name: 'Priya',
+    departmentId: ObjectId('69dcdf4b200d1811893682e5'),
+    department: [ { _id: ObjectId('69dcdf4b200d1811893682e5'), name: 'Marketing' } ]
+  }
+]
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" }
+| ])
+[
+  {
+    _id: ObjectId('69dcdf69200d1811893682e6'),
+    name: 'Amit',
+    departmentId: ObjectId('69dcdf46200d1811893682e4'),
+    dept: { _id: ObjectId('69dcdf46200d1811893682e4'), name: 'Engineering' }
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e7'),
+    name: 'Neha',
+    departmentId: ObjectId('69dcdf3f200d1811893682e3'),
+    dept: { _id: ObjectId('69dcdf3f200d1811893682e3'), name: 'HR' }
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e8'),
+    name: 'Priya',
+    departmentId: ObjectId('69dcdf4b200d1811893682e5'),
+    dept: { _id: ObjectId('69dcdf4b200d1811893682e5'), name: 'Marketing' }
+  }
+]
+internDB>
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+internDB>
+
+C:\Users\Shamanth>mongosh sh
+Current Mongosh Log ID: 69dcdfff30f5d266323682d0
+Connecting to:          mongodb://127.0.0.1:27017/sh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.2
+Using MongoDB:          8.2.6
+Using Mongosh:          2.8.2
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-04-11T20:58:36.970+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+sh> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" }
+| ])
+
+sh> use internDB
+switched to db internDB
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" }
+| ])
+[
+  {
+    _id: ObjectId('69dcdf69200d1811893682e6'),
+    name: 'Amit',
+    departmentId: ObjectId('69dcdf46200d1811893682e4'),
+    dept: { _id: ObjectId('69dcdf46200d1811893682e4'), name: 'Engineering' }
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e7'),
+    name: 'Neha',
+    departmentId: ObjectId('69dcdf3f200d1811893682e3'),
+    dept: { _id: ObjectId('69dcdf3f200d1811893682e3'), name: 'HR' }
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e8'),
+    name: 'Priya',
+    departmentId: ObjectId('69dcdf4b200d1811893682e5'),
+    dept: { _id: ObjectId('69dcdf4b200d1811893682e5'), name: 'Marketing' }
+  }
+]
+internDB> db.tasks.aggregate([
+|   {
+|     $lookup: {
+|       from: "employees",
+|       localField: "assignedTo",
+|       foreignField: "_id",
+|       as: "employee"
+|     }
+|   }
+| ])
+[
+  {
+    _id: ObjectId('69dcd874200d1811893682d9'),
+    title: 'Task1',
+    status: 'Pending',
+    isDeleted: false,
+    employee: []
+  },
+  {
+    _id: ObjectId('69dcd874200d1811893682da'),
+    title: 'Task2',
+    status: 'Completed',
+    isDeleted: false,
+    employee: []
+  },
+  {
+    _id: ObjectId('69dcd874200d1811893682db'),
+    title: 'Task3',
+    status: 'Pending',
+    isDeleted: true,
+    employee: []
+  }
+]
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" },
+|   { $project: { name: 1, "dept.name": 1 } }
+| ])
+[
+  {
+    _id: ObjectId('69dcdf69200d1811893682e6'),
+    name: 'Amit',
+    dept: { name: 'Engineering' }
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e7'),
+    name: 'Neha',
+    dept: { name: 'HR' }
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e8'),
+    name: 'Priya',
+    dept: { name: 'Marketing' }
+  }
+]
+internDB> db.tasks.aggregate([
+|   {
+|     $lookup: {
+|       from: "employees",
+|       localField: "assignedTo",
+|       foreignField: "_id",
+|       as: "emp"
+|     }
+|   },
+|   { $unwind: "$emp" },
+|   { $project: { title: 1, "emp.name": 1 } }
+| ])
+|
+
+internDB> db.employees.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" },
+|   { $project: { name: 1, "dept.name": 1 } }
+| ])
+
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" },
+|   { $match: { "dept.name": "Engineering" } }
+| ])
+|
+[
+  {
+    _id: ObjectId('69dcdf69200d1811893682e6'),
+    name: 'Amit',
+    departmentId: ObjectId('69dcdf46200d1811893682e4'),
+    dept: { _id: ObjectId('69dcdf46200d1811893682e4'), name: 'Engineering' }
+  }
+]
+internDB> db.tasks.aggregate([
+|   {
+|     $lookup: {
+|       from: "projects",
+|       localField: "projectId",
+|       foreignField: "_id",
+|       as: "project"
+|     }
+|   },
+|   { $unwind: "$project" },
+|   { $project: { title: 1, "project.title": 1 } }
+| ])
+
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   {
+|     $lookup: {
+|       from: "tasks",
+|       localField: "_id",
+|       foreignField: "assignedTo",
+|       as: "tasks"
+|     }
+|   },
+|   { $unwind: "$dept" }
+| ])
+[
+  {
+    _id: ObjectId('69dcdf69200d1811893682e6'),
+    name: 'Amit',
+    departmentId: ObjectId('69dcdf46200d1811893682e4'),
+    dept: { _id: ObjectId('69dcdf46200d1811893682e4'), name: 'Engineering' },
+    tasks: []
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e7'),
+    name: 'Neha',
+    departmentId: ObjectId('69dcdf3f200d1811893682e3'),
+    dept: { _id: ObjectId('69dcdf3f200d1811893682e3'), name: 'HR' },
+    tasks: []
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e8'),
+    name: 'Priya',
+    departmentId: ObjectId('69dcdf4b200d1811893682e5'),
+    dept: { _id: ObjectId('69dcdf4b200d1811893682e5'), name: 'Marketing' },
+    tasks: []
+  }
+]
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" },
+|   {
+|     $group: {
+|       _id: "$dept.name",
+|       totalInterns: { $sum: 1 }
+|     }
+|   }
+| ])
+|
+[
+  { _id: 'HR', totalInterns: 1 },
+  { _id: 'Engineering', totalInterns: 1 },
+  { _id: 'Marketing', totalInterns: 1 }
+]
+internDB> db.employees.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   {
+|     $lookup: {
+|       from: "tasks",
+|       localField: "_id",
+|       foreignField: "assignedTo",
+|       as: "tasks"
+|     }
+|   },
+|   { $unwind: "$dept" },
+|   {
+|     $project: {
+|       name: 1,
+|       "dept.name": 1,
+|       taskCount: { $size: "$tasks" }
+|     }
+|   }
+| ])
+|
+
+internDB> db.interns.aggregate([
+|   {
+|     $lookup: {
+|       from: "departments",
+|       localField: "departmentId",
+|       foreignField: "_id",
+|       as: "dept"
+|     }
+|   },
+|   { $unwind: "$dept" },
+|   {
+|     $project: {
+|       name: 1,
+|       department: "$dept.name"
+|     }
+|   }
+| ])
+[
+  {
+    _id: ObjectId('69dcdf69200d1811893682e6'),
+    name: 'Amit',
+    department: 'Engineering'
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e7'),
+    name: 'Neha',
+    department: 'HR'
+  },
+  {
+    _id: ObjectId('69dcdf69200d1811893682e8'),
+    name: 'Priya',
+    department: 'Marketing'
+  }
+]
+internDB>

@@ -1,0 +1,200 @@
+Basic Tasks 
+1. Create and switch to a database called internhub. 
+
+> use internhub
+
+
+2. Create a collection called students. 
+
+> db.createCollection("students")
+
+
+3. Insert 1 document into students with fields: name, age, course. 
+
+db.students.insertOne({
+  name: "Deekshith",
+  age: 21,
+  course: "AI & ML"
+})
+
+
+4. Insert 1 more document with different values. 
+
+db.students.insertOne({
+  name: "Vinay",
+  age: 22,
+  course: "Computer Science"
+})
+
+
+5. Show all documents from students.
+
+> db.students.find()
+
+> db.students.find().pretty()
+
+
+
+
+
+Intermediate Tasks
+1. Create a collection called employees and insert 3 employee documents.
+
+> db.createCollection("employees")
+
+db.employees.insertMany([
+  {
+    name: "Alice",
+    age: 30,
+    role: "Developer",
+    email: "alice@gmail.com",
+    phone: "9876543210"
+  },
+  {
+    name: "Bob",
+    age: 28,
+    role: "Designer"
+  },
+  {
+    name: "Charlie",
+    age: 35,
+    role: "Manager"
+  }
+])
+
+
+2. Create a collection called departments and insert 3 department documents.
+
+> db.createCollection("departments")
+
+db.departments.insertMany([
+  { deptName: "IT", location: "Bangalore" },
+  { deptName: "HR", location: "Mysore" },
+  { deptName: "Finance", location: "Delhi" }
+])
+
+4. Create a products collection with fields: name, price, category, stock.
+
+> db.createCollection("products")
+
+db.products.insertMany([
+  { name: "Laptop", price: 60000, category: "Electronics", stock: 10 },
+  { name: "Phone", price: 30000, category: "Electronics", stock: 25 },
+  { name: "Chair", price: 2000, category: "Furniture", stock: 50 }
+])
+
+
+5. Print documents from all 3 collections and identify collection name, document, and field.
+
+> db.employees.find().pretty()
+
+> db.departments.find().pretty()
+
+> db.products.find().pretty()
+
+
+
+
+Advanced Tasks
+1. Create a collection interns with 5 documents where each document has a slightly different structure.
+
+> db.createCollection("interns")
+
+db.interns.insertMany([
+  {
+    name: "Deekshith",
+    age: 21,
+    role: "ML Intern"
+  },
+  {
+    name: "Rahul",
+    age: 22,
+    role: "Web Intern",
+    duration: "3 months"
+  },
+  {
+    name: "vinay",
+    role: "Data Analyst Intern",
+    stipend: 10000
+  },
+  {
+    name: "Amit",
+    age: 23
+  },
+  {
+    name: "Gowda",
+    age: 20,
+    role: "AI Intern",
+    project: "Deepfake Detection"
+  }
+])
+
+
+2. Add nested object field address to one document.
+
+db.interns.updateOne(
+  { name: "Deekshith" },
+  {
+    $set: {
+      address: {
+        city: "Mysuru",
+        state: "Karnataka",
+        pincode: 570001
+      }
+    }
+  }
+)
+
+
+3. Add array field skills to two documents.
+
+db.interns.updateOne(
+  { name: "Rahul" },
+  {
+    $set: {
+      skills: ["HTML", "CSS", "JavaScript"]
+    }
+  }
+)
+
+db.interns.updateOne(
+  { name: "Priya" },
+  {
+    $set: {
+      skills: ["Python", "TensorFlow", "Deep Learning"]
+    }
+  }
+)
+
+> db.interns.find().pretty()
+
+
+4. Compare the students collection structure with how it would look in MySQL.
+
+> MongoDB (Document-Based)
+{
+  "name": "Deekshith",
+  "age": 21,
+  "course": "AI & ML"
+}
+
+> MySQL (Table-Based)
+CREATE TABLE students (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50),
+  age INT,
+  course VARCHAR(50)
+);
+
+INSERT INTO students (name, age, course)
+VALUES ("Deekshith", 21, "AI & ML");
+
+
+
+5. Write 5 observations about why MongoDB is called a schema-flexible database.
+
+* No Fixed Structure
+* Fields Can Be Missing or Extra
+* Supports Nested Objects
+* Supports Arrays
+* Easy to Modify Schema Anytime

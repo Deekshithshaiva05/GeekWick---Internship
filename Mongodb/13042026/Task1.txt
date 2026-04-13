@@ -1,0 +1,203 @@
+		----- Topic 1: Aggregation Basics ------
+
+<5 Basic Tasks>
+1. Count total number of interns in the interns collection.
+
+db.interns.aggregate([
+  {
+    $count: "total_interns"
+  }
+])
+
+
+2. Group interns by department and count how many are in each department.
+
+db.interns.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      count: { $sum: 1 }
+    }
+  }
+])
+
+
+3. Find average age of all interns.
+
+db.interns.aggregate([
+  {
+    $group: {
+      _id: null,
+      avg_age: { $avg: "$age" }
+    }
+  }
+])
+
+
+4. Group employees by department and count total employees.
+
+db.employees.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      total_employees: { $sum: 1 }
+    }
+  }
+])
+
+
+5. Find total number of tasks for each status.
+
+db.tasks.aggregate([
+  {
+    $group: {
+      _id: "$status",
+      total_tasks: { $sum: 1 }
+    }
+  }
+])
+
+
+<5 Intermediate Tasks>
+1. Find average salary by department from employees.
+
+db.employees.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      avg_salary: { $avg: "$salary" }
+    }
+  }
+])
+
+
+2. Find total stock available per category from products.
+
+db.products.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      total_stock: { $sum: "$stock" }
+    }
+  }
+])
+
+
+3. Count how many interns are active in each department.
+
+db.interns.aggregate([
+  {
+    $match: { status: "active" }
+  },
+  {
+    $group: {
+      _id: "$department",
+      active_count: { $sum: 1 }
+    }
+  }
+])
+
+
+4. Find highest salary in each department.
+
+db.employees.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      max_salary: { $max: "$salary" }
+    }
+  }
+])
+
+
+5. Find total number of projects in each status (Active, Pending, Completed).
+
+db.projects.aggregate([
+  {
+    $group: {
+      _id: "$status",
+      total_projects: { $sum: 1 }
+    }
+  }
+])
+
+
+
+<5 Advanced Tasks>
+1. Find average age of active interns grouped by department.
+
+db.interns.aggregate([
+  {
+    $match: { status: "active" }
+  },
+  {
+    $group: {
+      _id: "$department",
+      avg_age: { $avg: "$age" }
+    }
+  }
+])
+
+
+2. Count only non-deleted tasks grouped by status.
+
+db.tasks.aggregate([
+  {
+    $match: { isDeleted: false }
+  },
+  {
+    $group: {
+      _id: "$status",
+      total_tasks: { $sum: 1 }
+    }
+  }
+])
+
+
+3. Find total budget of projects grouped by team.
+
+db.projects.aggregate([
+  {
+    $group: {
+      _id: "$team",
+      total_budget: { $sum: "$budget" }
+    }
+  }
+])
+
+
+4. Find minimum, maximum, and average salary for each department.
+
+db.employees.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      min_salary: { $min: "$salary" },
+      max_salary: { $max: "$salary" },
+      avg_salary: { $avg: "$salary" }
+    }
+  }
+])
+
+
+5. Create an aggregation that returns only department name and total employee count sorted descending.
+
+db.employees.aggregate([
+  {
+    $group: {
+      _id: "$department",
+      total_employees: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      department: "$_id",
+      total_employees: 1
+    }
+  },
+  {
+    $sort: { total_employees: -1 }
+  }
+])
+
