@@ -1,0 +1,16 @@
+/* Import all partials */
+@import 'variables';
+@import 'mixins';
+@import 'card';
+
+/* Global */
+body {
+  background: $bg-color;
+  font-family: Arial;
+}
+
+/* Center layout */
+.container {
+  @include flex-center;
+  height: 100vh;
+}

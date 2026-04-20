@@ -1,0 +1,26 @@
+/* 1. Change background color of the page */
+body {
+    background-color: lightblue;
+}
+
+/* 2. Change text color of headings */
+h1 {
+    color: darkred;
+}
+
+/* 5. Change font size of paragraph */
+p {
+    font-size: 20px;
+}
+
+/* 3. Add padding to a div */
+.container {
+    padding: 20px;
+}
+
+/* 4. Add border to a card */
+.card {
+    border: 2px solid black;
+    padding: 15px;
+    margin-top: 10px;
+}

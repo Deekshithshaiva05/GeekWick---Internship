@@ -1,0 +1,27 @@
+/* Variables */
+$primary: blue;
+$padding: 10px;
+
+/* Body */
+body {
+  background: #f0f8ff;
+}
+
+/* Heading */
+h1 {
+  color: $primary;
+}
+
+/* Paragraph */
+p {
+  font-size: 18px;
+}
+
+/* Button */
+.button {
+  background: $primary;
+  padding: $padding;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
